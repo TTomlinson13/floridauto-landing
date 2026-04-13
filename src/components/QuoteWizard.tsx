@@ -26,7 +26,7 @@ export const QuoteWizard = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg border border-gray-100">
-      <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">Florida Auto Insurance</h2>
+      <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">FloridAuto Insurance</h2>
 
       {mode === 'select' && (
         <div className="space-y-3">
