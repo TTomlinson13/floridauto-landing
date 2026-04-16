@@ -1,9 +1,9 @@
 function App() {
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white shadow-lg">
+      <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src="/assets/logos/floridauto/tc-logo-medium.jpg" alt="FloridAuto" className="h-12" />
@@ -18,86 +18,127 @@ function App() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-12 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            FASTEST Auto Insurance Quotes
-          </h2>
-          <p className="text-2xl text-yellow-300 font-semibold mb-8">
-            SAME DAY COVERAGE!
-          </p>
-          
-          {/* Action Buttons */}
-          <div className="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-8">
-            <a 
-              href="https://hoinsurance.wufoo.com/forms/r1pjgdx504btju2/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-5 px-6 rounded-xl shadow-lg transition transform hover:scale-105 block"
-            >
-              <span className="text-2xl block mb-1">⚡</span>
-              <span className="text-lg">Sync My Policy</span>
-              <span className="block text-sm font-normal">(Fastest Way)</span>
-            </a>
-            <a 
-              href="https://hoinsurance.wufoo.com/forms/r1pjgdx504btju2/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-gray-100 text-blue-900 font-bold py-5 px-6 rounded-xl shadow-lg transition transform hover:scale-105"
-            >
-              <span className="text-2xl block mb-1">📝</span>
-              <span className="text-lg">Start Quote</span>
-              <span className="block text-sm font-normal">2 Minutes</span>
-            </a>
-            <a 
-              href="tel:800-616-1418"
-              className="bg-green-600 hover:bg-green-500 text-white font-bold py-5 px-6 rounded-xl shadow-lg transition transform hover:scale-105"
-            >
-              <span className="text-2xl block mb-1">📞</span>
-              <span className="text-lg">Call Now</span>
-              <span className="block text-sm font-normal">Instant Quote</span>
-            </a>
+      {/* Hero Section with Car Background */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-25"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=80')" }}
+        ></div>
+        
+        <div className="relative max-w-6xl mx-auto px-4 py-16 md:py-20">
+          <div className="text-center">
+            <p className="text-blue-300 font-semibold mb-2 uppercase tracking-wider">Florida Auto Insurance</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              FASTEST Auto Insurance Quotes
+            </h2>
+            <p className="text-2xl text-yellow-300 font-semibold mb-8">
+              SAME DAY COVERAGE!
+            </p>
+            
+            {/* Action Buttons */}
+            <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-8">
+              <a 
+                href="https://app.usecanopy.com/c/tomlinson-and-co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 px-6 rounded-xl shadow-lg transition transform hover:scale-105 text-center relative overflow-hidden"
+              >
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-2 py-0.5 rounded-bl-lg font-bold">EASY!</span>
+                <span className="text-xl block mb-1">⚡</span>
+                <span className="text-lg">Sync My Policy</span>
+                <span className="block text-xs font-normal mt-1">We pull your info automatically</span>
+              </a>
+              <a 
+                href="https://hoinsurance.wufoo.com/forms/r1pjgdx504btju2/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white hover:bg-gray-100 text-blue-900 font-bold py-4 px-6 rounded-xl shadow-lg transition text-center"
+              >
+                <span className="text-xl block mb-1">📝</span>
+                <span>Start Quote</span>
+                <span className="block text-xs font-normal">2 Minutes</span>
+              </a>
+              <a 
+                href="tel:800-616-1418"
+                className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition text-center"
+              >
+                <span className="text-xl block mb-1">📞</span>
+                <span>Call Now</span>
+                <span className="block text-xs font-normal">Instant Help</span>
+              </a>
+            </div>
+            
+            {/* Sync My Policy Callout */}
+            <div className="mx-auto max-w-xl bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-lg text-left">
+              <p className="text-yellow-800 text-sm">
+                <strong>💡 Tip:</strong> Click <strong>"Sync My Policy"</strong> to securely connect your current insurance — we'll pull your info automatically. No forms to fill out!
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Trust Bar */}
+      <section className="bg-blue-900 py-4 px-4">
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-6 text-blue-100 text-sm">
+          <span>✓ Licensed Since 1966</span>
+          <span>✓ A-Rated Carriers</span>
+          <span>✓ Same-Day Coverage</span>
+          <span>✓ All Driver Types Welcome</span>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section className="py-12 px-4 bg-white">
+      <section className="py-16 px-4 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <h3 className="text-3xl font-bold text-center text-blue-900 mb-4">
             Bundle Your Auto & Homeowners With HUGE Discounts!
           </h3>
-          <p className="text-center text-gray-600 mb-10 text-lg">Look at our program highlights and CALL Today:</p>
+          <p className="text-center text-gray-600 mb-12 text-lg">Look at our program highlights and CALL Today:</p>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6 rounded-xl bg-blue-50 border-2 border-blue-200">
-              <div className="text-4xl mb-4">🚀</div>
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="text-center p-6 rounded-2xl bg-white shadow-lg border border-gray-100">
+              <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🚀</span>
+              </div>
               <h4 className="font-bold text-lg text-blue-900 mb-2">Same Day Coverage</h4>
-              <p className="text-gray-600">Auto Insurance Policies Can Be Issued the Same Day Quoted.</p>
+              <p className="text-gray-600 text-sm">Policies issued the same day you're quoted.</p>
             </div>
-            <div className="text-center p-6 rounded-xl bg-green-50 border-2 border-green-200">
-              <div className="text-4xl mb-4">💰</div>
+            <div className="text-center p-6 rounded-2xl bg-white shadow-lg border border-gray-100">
+              <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">💰</span>
+              </div>
               <h4 className="font-bold text-lg text-green-800 mb-2">Save Over 35%</h4>
-              <p className="text-gray-600">We Save Many Clients Over 35% On Their Previous Policy.</p>
+              <p className="text-gray-600 text-sm">Many clients save 35%+ on their previous policy.</p>
             </div>
-            <div className="text-center p-6 rounded-xl bg-yellow-50 border-2 border-yellow-600">
-              <div className="text-4xl mb-4">⏱️</div>
+            <div className="text-center p-6 rounded-2xl bg-white shadow-lg border border-gray-100">
+              <div className="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">⏱️</span>
+              </div>
               <h4 className="font-bold text-lg text-yellow-700 mb-2">Only 2 Minutes</h4>
-              <p className="text-gray-600">Easy Online Application, Only Takes TWO MINUTES!</p>
+              <p className="text-gray-600 text-sm">Easy online application — super fast!</p>
+            </div>
+            <div className="text-center p-6 rounded-2xl bg-white shadow-lg border border-gray-100">
+              <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🚗</span>
+              </div>
+              <h4 className="font-bold text-lg text-purple-800 mb-2">All Drivers Welcome</h4>
+              <p className="text-gray-600 text-sm">Tickets, accidents, DUI — we help everyone.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Unlucky Driver Section */}
-      <section className="py-12 px-4 bg-gray-900 text-white">
+      <section className="py-16 px-4 bg-gray-900 text-white">
         <div className="max-w-5xl mx-auto">
+          <h3 className="text-3xl font-bold text-center mb-12">We Help Every Driver</h3>
           <div className="grid md:grid-cols-2 gap-8">
             {/* Unlucky Driver */}
-            <div className="bg-gray-800 p-8 rounded-xl">
+            <div className="bg-gray-800 p-8 rounded-2xl">
               <h3 className="text-2xl font-bold text-yellow-400 mb-4">
-                🍀 Our "Unlucky Driver" Auto Program
+                🍀 Our "Unlucky Driver" Program
               </h3>
               <p className="text-gray-300 mb-4">
                 If you've had a string of "Bad Luck", gotten a few tickets, or had an accident, 
@@ -111,21 +152,32 @@ function App() {
             </div>
 
             {/* DUI Section */}
-            <div className="bg-gray-800 p-8 rounded-xl">
+            <div className="bg-gray-800 p-8 rounded-2xl">
               <h3 className="text-2xl font-bold text-yellow-400 mb-4">
-                🛡️ Special Florida Auto Insurance for DUI
+                🛡️ Special Insurance for DUI
               </h3>
               <p className="text-gray-300 mb-4">
-                Getting a DUI can be a bad experience, but we make the insurance part of it a little easier. 
+                Getting a DUI can be a bad experience, but we make the insurance part easier. 
                 We help keep your insurance costs DOWN if you have a DUI.
               </p>
               <ul className="space-y-2 text-gray-200">
                 <li>✓ Companies that specialize in DUI situations</li>
-                <li>✓ DUI coverage with us is easy and un-embarrassing</li>
-                <li>✓ If your license is suspended, we can help get it back</li>
+                <li>✓ Coverage with us is easy and un-embarrassing</li>
+                <li>✓ If your license is suspended, we can help</li>
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Testimonial Section */}
+      <section className="py-16 px-4 bg-blue-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="text-5xl mb-6">⭐⭐⭐⭐⭐</div>
+          <blockquote className="text-2xl text-gray-700 italic mb-6">
+            "They saved me over $800 a year and got me covered the same day. Even with my tickets, they found me a great rate!"
+          </blockquote>
+          <p className="text-gray-600 font-semibold">— Happy Florida Driver</p>
         </div>
       </section>
 
@@ -133,17 +185,27 @@ function App() {
       <section className="py-16 px-4 bg-gradient-to-r from-green-600 to-green-700">
         <div className="max-w-3xl mx-auto text-center">
           <h3 className="text-3xl font-bold text-white mb-4">
-            Fast Phone Quotes: 800-616-1418
+            Ready to Save on Auto Insurance?
           </h3>
           <p className="text-xl text-green-100 mb-8">
-            We can give you a phone quote INSTANTLY.
+            Get your free quote in minutes — or call for instant help.
           </p>
-          <a 
-            href="tel:800-616-1418"
-            className="inline-block bg-white text-green-700 font-bold text-xl py-4 px-10 rounded-xl shadow-lg hover:bg-gray-100 transition transform hover:scale-105"
-          >
-            📞 Call 800-616-1418 Now
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://hoinsurance.wufoo.com/forms/r1pjgdx504btju2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white text-green-700 font-bold text-xl py-4 px-10 rounded-xl shadow-lg hover:bg-gray-100 transition"
+            >
+              Get Free Quote →
+            </a>
+            <a 
+              href="tel:800-616-1418"
+              className="bg-green-800 hover:bg-green-900 text-white font-bold text-xl py-4 px-10 rounded-xl shadow-lg transition"
+            >
+              📞 800-616-1418
+            </a>
+          </div>
         </div>
       </section>
 
