@@ -96,7 +96,7 @@ function App() {
             We Represent Florida's Top Auto Insurance Carriers
           </h3>
           <p className="text-gray-600 mb-4">
-            Progressive • Safeco • Travelers • Hartford • Mercury • Bristol West • Dairyland • National General • and many more!
+            Progressive • Safeco • Travelers • Geico • Mercury • Bristol West • Root • National General • and many more!
           </p>
           <p className="text-sm text-gray-500">
             We shop them all to find YOU the best rate — often saving clients 35% or more.
