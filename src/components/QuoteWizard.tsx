@@ -1,4 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
+declare global {
+  interface Window {
+    CanopyConnect?: {
+      open: (config: { client_id: string; onSuccess: (data: unknown) => void }) => void;
+    };
+  }
+}
 
 export const QuoteWizard = () => {
   const [mode, setMode] = useState<'select' | 'wizard'>('select');
@@ -12,12 +20,10 @@ export const QuoteWizard = () => {
   }, []);
 
   const handleCanopySync = () => {
-    // @ts-ignore
     if (window.CanopyConnect) {
-      // @ts-ignore
       window.CanopyConnect.open({
-        client_id: import.meta.env.VITE_CANOPY_CLIENT_ID,
-        onSuccess: (data: any) => alert("Policy synced successfully!"),
+        client_id: import.meta.env.VITE_CANOPY_CLIENT_ID || '',
+        onSuccess: () => alert("Policy synced successfully!"),
       });
     } else {
       alert("Canopy SDK loading...");
