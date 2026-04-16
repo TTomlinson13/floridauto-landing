@@ -170,6 +170,24 @@ function App() {
         </div>
       </section>
 
+      {/* Bundle Home Section */}
+      <section className="py-12 px-4 bg-teal-600">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-2xl font-bold text-white mb-3">
+            🏠 Need Homeowners or Flood Insurance?
+          </h3>
+          <p className="text-teal-100 text-lg mb-4">
+            Bundle your auto and home for even bigger savings! We cover Florida homes anywhere — even barrier islands.
+          </p>
+          <a 
+            href="https://hoinsurance.com"
+            className="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-xl shadow-lg hover:bg-gray-100 transition"
+          >
+            Get Home Quote at HOInsurance.com →
+          </a>
+        </div>
+      </section>
+
       {/* Testimonial Section */}
       <section className="py-16 px-4 bg-blue-50">
         <div className="max-w-4xl mx-auto text-center">
