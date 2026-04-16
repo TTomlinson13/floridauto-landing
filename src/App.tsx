@@ -1,35 +1,4 @@
-import { useState, useEffect } from 'react'
-
-declare global {
-  interface Window {
-    CanopyConnect?: {
-      open: (config: { client_id: string; onSuccess: (data: unknown) => void }) => void;
-    };
-  }
-}
-
 function App() {
-  const [canopyReady, setCanopyReady] = useState(false);
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://js.usecanopy.com/v1/canopy-connect.js";
-    script.async = true;
-    script.onload = () => setCanopyReady(true);
-    document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
-  }, []);
-
-  const handleCanopySync = () => {
-    if (window.CanopyConnect && canopyReady) {
-      window.CanopyConnect.open({
-        client_id: import.meta.env.VITE_CANOPY_CLIENT_ID || '',
-        onSuccess: () => alert("Policy synced successfully! We'll contact you shortly with your quote."),
-      });
-    } else {
-      alert("Loading... please try again in a moment.");
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900">
@@ -61,14 +30,16 @@ function App() {
           
           {/* Action Buttons */}
           <div className="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-8">
-            <button 
-              onClick={handleCanopySync}
-              className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-5 px-6 rounded-xl shadow-lg transition transform hover:scale-105"
+            <a 
+              href="https://app.usecanopy.com/c/tomlinson-and-co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-5 px-6 rounded-xl shadow-lg transition transform hover:scale-105 block"
             >
               <span className="text-2xl block mb-1">⚡</span>
               <span className="text-lg">Sync My Policy</span>
               <span className="block text-sm font-normal">(Fastest Way)</span>
-            </button>
+            </a>
             <a 
               href="https://app.usecanopy.com/c/tomlinson-and-co"
               target="_blank"
