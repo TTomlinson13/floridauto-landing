@@ -89,6 +89,21 @@ function App() {
         </div>
       </section>
 
+      {/* Carriers Section */}
+      <section className="py-10 px-4 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-2xl font-bold text-blue-900 mb-3">
+            We Represent Florida's Top Auto Insurance Carriers
+          </h3>
+          <p className="text-gray-600 mb-4">
+            Progressive • Safeco • Travelers • Hartford • Mercury • Bristol West • Dairyland • National General • and many more!
+          </p>
+          <p className="text-sm text-gray-500">
+            We shop them all to find YOU the best rate — often saving clients 35% or more.
+          </p>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-16 px-4 bg-gray-50">
         <div className="max-w-5xl mx-auto">
