@@ -46,8 +46,8 @@ function App() {
               >
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-2 py-0.5 rounded-bl-lg font-bold">EASY!</span>
                 <span className="text-xl block mb-1">⚡</span>
-                <span className="text-lg">Sync My Policy</span>
-                <span className="block text-xs font-normal mt-1">We pull your info automatically</span>
+                <span className="text-lg">Quick Quote</span>
+                <span className="block text-xs font-normal mt-1">2 mins • Auto-fill</span>
               </a>
               <a 
                 href="https://hoinsurance.wufoo.com/forms/r1pjgdx504btju2/"
@@ -56,16 +56,16 @@ function App() {
                 className="bg-white hover:bg-gray-100 text-blue-900 font-bold py-4 px-6 rounded-xl shadow-lg transition text-center"
               >
                 <span className="text-xl block mb-1">📝</span>
-                <span>Start Quote</span>
-                <span className="block text-xs font-normal">2 Minutes</span>
+                <span>Full Quote Form</span>
+                <span className="block text-xs font-normal">Detailed application</span>
               </a>
               <a 
                 href="tel:800-616-1418"
                 className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition text-center"
               >
                 <span className="text-xl block mb-1">📞</span>
-                <span>Call Now</span>
-                <span className="block text-xs font-normal">Instant Help</span>
+                <span>Call Us</span>
+                <span className="block text-xs font-normal">800-616-1418</span>
               </a>
             </div>
             
