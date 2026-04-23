@@ -19,12 +19,28 @@ function App() {
       </header>
 
       {/* Hero Section with Car Background */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-25"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=80')" }}
-        ></div>
+      <section className="relative bg-blue-900 overflow-hidden">
+        {/* Ken Burns animated background */}
+        <style>{`
+          @keyframes kenBurnsAuto {
+            0%   { transform: scale(1.0) translate(0%, 0%); }
+            25%  { transform: scale(1.08) translate(-1%, -1.5%); }
+            50%  { transform: scale(1.12) translate(1.5%, -1%); }
+            75%  { transform: scale(1.08) translate(1%, 1.5%); }
+            100% { transform: scale(1.0) translate(0%, 0%); }
+          }
+          .hero-bg-auto {
+            animation: kenBurnsAuto 28s ease-in-out infinite;
+            will-change: transform;
+          }
+        `}</style>
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className="hero-bg-auto absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/hero-florida-cars.jpg')", opacity: 0.45 }}
+          ></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-blue-800/60 to-blue-900/70"></div>
+        </div>
         
         <div className="relative max-w-6xl mx-auto px-4 py-16 md:py-20">
           <div className="text-center">
