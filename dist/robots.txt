@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://floridauto.com/sitemap.xml
