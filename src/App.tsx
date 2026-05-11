@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function App() {
 
   return (
@@ -12,9 +14,12 @@ function App() {
               <p className="text-sm text-gray-600">Florida Auto Insurance Specialists</p>
             </div>
           </div>
-          <a href="tel:800-616-1418" className="hidden sm:flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold transition">
-            📞 800-616-1418
-          </a>
+          <div className="flex items-center gap-4">
+            <Link to="/blog" className="hidden sm:inline text-blue-700 font-semibold hover:text-blue-900 transition">Blog</Link>
+            <a href="tel:800-616-1418" className="hidden sm:flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold transition">
+              📞 800-616-1418
+            </a>
+          </div>
         </div>
       </header>
 
@@ -270,6 +275,9 @@ function App() {
           </p>
           <p className="text-xs mt-4">
             © {new Date().getFullYear()} Tomlinson & Co Inc. All rights reserved.
+          </p>
+          <p className="text-xs mt-2">
+            <Link to="/blog" className="text-gray-400 hover:text-white underline">Blog</Link>
           </p>
         </div>
       </footer>
