@@ -273,7 +273,19 @@ function App() {
             FloridAuto.com • Florida Auto Insurance Specialists<br/>
             A Tomlinson & Co Agency
           </p>
-          <p className="text-xs mt-4">
+
+          {/* Sister Sites */}
+          <div className="mt-6 pt-6 border-t border-gray-700">
+            <p className="text-xs text-gray-500 uppercase tracking-wide mb-3">Also from Tomlinson & Co</p>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+              <a href="https://tomlinsonandco.com" className="text-gray-400 hover:text-white transition">Tomlinson &amp; Co (Parent Agency)</a>
+              <a href="https://hoinsurance.com" className="text-gray-400 hover:text-white transition">Florida Home Insurance</a>
+              <a href="https://easycommercialauto.com" className="text-gray-400 hover:text-white transition">Commercial Auto Insurance</a>
+              <a href="https://easycommercialinsurance.com" className="text-gray-400 hover:text-white transition">Commercial Insurance</a>
+            </div>
+          </div>
+
+          <p className="text-xs mt-6">
             © {new Date().getFullYear()} Tomlinson & Co Inc. All rights reserved.
           </p>
           <p className="text-xs mt-2">
