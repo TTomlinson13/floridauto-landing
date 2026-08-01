@@ -54,6 +54,12 @@ function App() {
         </div>
       </header>
 
+      {/* News Banner */}
+      <div className="bg-amber-500 text-amber-900 text-center py-2 px-4 text-sm font-semibold">
+        📉 Florida auto rates trending DOWN in 2026 — Best time in years to compare.{' '}
+        <button onClick={() => setShowJotform(true)} className="underline font-bold hover:text-amber-700">Get your updated quote →</button>
+      </div>
+
       {/* Hero Section with Car Background */}
       <section className="relative bg-blue-900 overflow-hidden">
         {/* Ken Burns animated background */}
