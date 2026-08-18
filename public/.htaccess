@@ -2,10 +2,7 @@ Options -MultiViews
 RewriteEngine On
 
 # ---------------------------------------------------------------------------
-# 1. Canonical host — strip www.
-#
-#    www.floridauto.com and floridauto.com both answered 200 with no redirect
-#    between them, so every page existed at two URLs and Google had to pick one.
+# 1. Canonical host — strip www, so each page has exactly one URL.
 #
 #    HTTPS is deliberately not forced here: TLS terminates at Hostinger's edge
 #    CDN, so %{HTTPS} is unreliable at this layer and a naive rule risks a
@@ -15,33 +12,59 @@ RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
 # ---------------------------------------------------------------------------
-# 2. Blog routes.
+# 2. index.html is never a URL of its own.
 #
-#    public/blog/ is a real directory because it holds posts.json, so the old
-#    generic !-d guard skipped it, Apache found no index file inside, and
-#    returned 403 Forbidden. /blog and every post URL were dead to crawlers and
-#    to anyone opening them directly — while /blog was listed in the sitemap.
-#    It only appeared to work when clicking through from the homepage, which is
-#    client-side routing that never touches the server.
-#
-#    The !-f guard keeps /blog/posts.json served as a real file; without it the
-#    slug rule would swallow the JSON the blog fetches at runtime.
+#    Prerendering writes dist/blog/index.html, so without these the blog index
+#    would be reachable at /blog, /blog/, /blog/index and /blog/index.html —
+#    four URLs for one page.
 # ---------------------------------------------------------------------------
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^blog/?$ /index.html [L]
+RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
+RewriteRule ^ / [R=301,L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^blog/[A-Za-z0-9._-]+/?$ /index.html [L]
+RewriteCond %{THE_REQUEST} \s/+([^?\s]+)/index(\.html)?[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
 
 # ---------------------------------------------------------------------------
-# 3. No catch-all.
+# 3. Extensionless URLs are canonical.
 #
-#    The previous config rewrote every unmatched request to index.html, so the
-#    site had no 404 at all: bogus paths and missing files answered 200 with
-#    the homepage. That is a soft 404 sitewide, and it means a request for a
-#    file that was never deployed looks like a success to a crawler.
+#    Prerendered posts are written as blog/<slug>.html but are linked,
+#    sitemapped and canonical-tagged as /blog/<slug>, so the .html form has to
+#    redirect rather than answer.
 #
-#    Real files and directories are still served normally; anything else now
-#    gets a genuine 404.
+#    THE_REQUEST holds the original request line and is not rewritten
+#    internally, so this fires only for genuine external requests and never for
+#    the internal rewrite in section 5. That is what keeps the two from
+#    ping-ponging.
+# ---------------------------------------------------------------------------
+RewriteCond %{THE_REQUEST} \s/+([^?\s]+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# ---------------------------------------------------------------------------
+# 4. Blog index.
+#
+#    public/blog/ is a real directory — it holds posts.json and the prerendered
+#    post pages — so a generic !-d guard skips it and Apache returns 403 for
+#    /blog. That was the bug this file was first opened to fix.
+# ---------------------------------------------------------------------------
+RewriteCond %{THE_REQUEST} \s/+blog/[\s?] [NC]
+RewriteRule ^ /blog [R=301,L]
+
+RewriteRule ^blog/?$ /blog/index.html [L]
+
+# ---------------------------------------------------------------------------
+# 5. Serve the prerendered file behind its extensionless URL.
+#
+#    Guarded on the .html actually existing, so it can never invent a page.
+#    /404 is excluded to keep the error document from becoming an indexable 200.
+# ---------------------------------------------------------------------------
+RewriteCond %{REQUEST_URI} !^/404
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ /$1.html [L]
+
+# ---------------------------------------------------------------------------
+# 6. No catch-all.
+#
+#    Every real post is prerendered to its own file, so an unknown /blog/<slug>
+#    is genuinely missing and should say so rather than serving an empty shell.
 # ---------------------------------------------------------------------------
 ErrorDocument 404 /404.html

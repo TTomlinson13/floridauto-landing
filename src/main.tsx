@@ -1,19 +1,26 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import App from './App'
-import Blog from './Blog'
-import BlogPost from './BlogPost'
+import { createRoot, hydrateRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import AppRoutes from './routes'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')!
+
+const app = (
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
+
+/**
+ * Prerendered routes arrive with markup already in #root, so hydrate them
+ * rather than throwing that HTML away and re-rendering from scratch. Any route
+ * that was not prerendered still mounts normally.
+ */
+if (container.hasChildNodes()) {
+  hydrateRoot(container, app)
+} else {
+  createRoot(container).render(app)
+}

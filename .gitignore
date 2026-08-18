@@ -1,4 +1,13 @@
 node_modules/
-dist/
 *.local
 .DS_Store
+*.log
+
+# Intermediate SSR bundle — consumed by scripts/prerender.mjs, never deployed.
+dist-ssr/
+
+# NOTE: dist/ is deliberately NOT ignored. This project's build script is
+# `echo 'Using pre-built dist'`, so Hostinger serves the committed dist/
+# verbatim — the live asset hash matches it exactly. Ignoring the build output
+# while the host serves it is how the deployed site drifted from source in the
+# first place. Regenerate with `npm run build:local` and commit the result.

@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "vite",
     "build": "echo 'Using pre-built dist'",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:client": "vite build",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
+    "prerender": "node scripts/prerender.mjs",
+    "build:local": "npm run build:client && npm run build:ssr && npm run prerender",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^19.2.1",

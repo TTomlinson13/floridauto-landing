@@ -1,3 +1,97 @@
+# robots.txt — floridauto.com
+# Tomlinson & Co / FloridAuto.com — Florida personal auto insurance
+# Same-day coverage, SR-22, and non-standard risk. Statewide Florida.
+#
+# Policy: fully open. We want both traditional search crawlers and AI
+# assistants to read, index, and cite this site.
+
 User-agent: *
 Allow: /
+
+# --- Search engines ---------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# --- AI assistants & answer engines -----------------------------------------
+# Explicitly allowed so these models can retrieve, quote, and cite our
+# Florida coverage and rate guidance.
+
+# OpenAI — training, live retrieval, and ChatGPT search
+# NOTE: GPTBot is currently answered with HTTP 429 by Hostinger's edge CDN
+# before requests ever reach this file. That block is a hosting-panel setting,
+# not a robots.txt rule, and has to be lifted in hPanel.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI (Gemini / AI Overviews grounding)
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft Copilot
+User-agent: Bingbot-Extended
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Common Crawl — feeds many downstream model corpora
+User-agent: CCBot
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# --- Guidance ---------------------------------------------------------------
 Sitemap: https://floridauto.com/sitemap.xml
+
+# Plain-language summary of who we are and what we cover, for LLM ingestion:
+# https://floridauto.com/llms.txt

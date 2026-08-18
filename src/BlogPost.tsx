@@ -1,85 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-
-interface Post {
-  id: number
-  slug: string
-  title: string
-  date: string
-  summary: string
-  body: string
-  tags: string[]
-}
+import { getPost, formatDate } from './posts'
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
-  const [post, setPost] = useState<Post | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(false)
+  const post = getPost(slug)
 
+  /**
+   * JSON-LD and the document title are baked into each prerendered page by
+   * scripts/prerender.mjs, so a crawler that never runs JavaScript still sees
+   * them. This only keeps the title in sync during client-side navigation.
+   */
   useEffect(() => {
-    fetch('/blog/posts.json')
-      .then(r => r.json())
-      .then((data: Post[]) => {
-        const found = data.find(p => p.slug === slug)
-        if (found) {
-          setPost(found)
-        } else {
-          setNotFound(true)
-        }
-        setLoading(false)
-      })
-      .catch(() => {
-        setNotFound(true)
-        setLoading(false)
-      })
-  }, [slug])
-
-  // Inject JSON-LD schema once post loads
-  useEffect(() => {
-    if (!post) return
-    const existingScript = document.getElementById('blog-jsonld')
-    if (existingScript) existingScript.remove()
-
-    const script = document.createElement('script')
-    script.id = 'blog-jsonld'
-    script.type = 'application/ld+json'
-    script.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: post.title,
-      description: post.summary,
-      datePublished: post.date,
-      dateModified: post.date,
-      author: {
-        '@type': 'Organization',
-        name: 'FloridAuto.com — Tomlinson & Co',
-        url: 'https://floridauto.com'
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'FloridAuto.com',
-        url: 'https://floridauto.com',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://floridauto.com/assets/logos/floridauto/tc-logo-medium.jpg'
-        }
-      },
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': `https://floridauto.com/blog/${post.slug}`
-      },
-      keywords: post.tags.join(', ')
-    })
-    document.head.appendChild(script)
-
-    // Update page title
-    document.title = `${post.title} | FloridAuto.com`
-
-    return () => {
-      const s = document.getElementById('blog-jsonld')
-      if (s) s.remove()
-    }
+    if (post) document.title = `${post.title} | FloridAuto.com`
   }, [post])
 
   return (
@@ -103,18 +36,16 @@ export default function BlogPost() {
         </div>
       </header>
 
-      {loading && (
-        <div className="text-center text-gray-500 py-32">Loading…</div>
-      )}
+      
 
-      {notFound && !loading && (
+      {!post && (
         <div className="text-center py-32">
           <h1 className="text-3xl font-bold text-gray-700 mb-4">Post Not Found</h1>
           <Link to="/blog" className="text-blue-600 underline hover:text-blue-800">← Back to Blog</Link>
         </div>
       )}
 
-      {post && !loading && (
+      {post && (
         <>
           {/* Back Link + Hero */}
           <section className="bg-blue-900 py-10 px-4">
@@ -130,7 +61,7 @@ export default function BlogPost() {
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-3">{post.title}</h1>
               <p className="text-blue-300 text-sm">
-                {new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                {formatDate(post.date)}
                 {' · '}FloridAuto.com
               </p>
             </div>
