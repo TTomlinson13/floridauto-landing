@@ -1,0 +1,7 @@
+
+# Enforce LF — Apache can misparse a CRLF .htaccess (a trailing  gets
+# swallowed into the directive value).
+* text=auto eol=lf
+.htaccess text eol=lf
+*.png binary
+*.jpg binary

@@ -1,11 +1,47 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
+Options -MultiViews
+RewriteEngine On
 
-  # Don't rewrite files or directories
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
+# ---------------------------------------------------------------------------
+# 1. Canonical host — strip www.
+#
+#    www.floridauto.com and floridauto.com both answered 200 with no redirect
+#    between them, so every page existed at two URLs and Google had to pick one.
+#
+#    HTTPS is deliberately not forced here: TLS terminates at Hostinger's edge
+#    CDN, so %{HTTPS} is unreliable at this layer and a naive rule risks a
+#    redirect loop. http -> https already works upstream.
+# ---------------------------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
-  # Rewrite everything else to index.html
-  RewriteRule ^ index.html [L]
-</IfModule>
+# ---------------------------------------------------------------------------
+# 2. Blog routes.
+#
+#    public/blog/ is a real directory because it holds posts.json, so the old
+#    generic !-d guard skipped it, Apache found no index file inside, and
+#    returned 403 Forbidden. /blog and every post URL were dead to crawlers and
+#    to anyone opening them directly — while /blog was listed in the sitemap.
+#    It only appeared to work when clicking through from the homepage, which is
+#    client-side routing that never touches the server.
+#
+#    The !-f guard keeps /blog/posts.json served as a real file; without it the
+#    slug rule would swallow the JSON the blog fetches at runtime.
+# ---------------------------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^blog/?$ /index.html [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^blog/[A-Za-z0-9._-]+/?$ /index.html [L]
+
+# ---------------------------------------------------------------------------
+# 3. No catch-all.
+#
+#    The previous config rewrote every unmatched request to index.html, so the
+#    site had no 404 at all: bogus paths and missing files answered 200 with
+#    the homepage. That is a soft 404 sitewide, and it means a request for a
+#    file that was never deployed looks like a success to a crawler.
+#
+#    Real files and directories are still served normally; anything else now
+#    gets a genuine 404.
+# ---------------------------------------------------------------------------
+ErrorDocument 404 /404.html
